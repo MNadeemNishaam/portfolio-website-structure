@@ -49,6 +49,7 @@ export default function Page() {
 
     const form = event.currentTarget
     const formData = new FormData(form)
+    const senderEmail = String(formData.get('email') ?? '')
 
     setIsSubmitting(true)
     try {
@@ -60,9 +61,10 @@ export default function Page() {
         },
         body: JSON.stringify({
           name: formData.get('name'),
-          email: formData.get('email'),
+          email: senderEmail,
           message: formData.get('message'),
-          subject: 'New portfolio contact form submission',
+          _subject: 'New portfolio contact form submission',
+          _replyto: senderEmail,
         }),
       })
 
