@@ -40,7 +40,8 @@ jobs:
 
       - name: Build static export
         env:
-          NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORMSPREE_ENDPOINT }}
+          NEXT_PUBLIC_CONTACT_RECIPIENT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_RECIPIENT_EMAIL }}
+          NEXT_PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT }}
         run: pnpm build
 
       - name: Disable Jekyll
