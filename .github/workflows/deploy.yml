@@ -39,6 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static export
+        env:
+          NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORMSPREE_ENDPOINT }}
         run: pnpm build
 
       - name: Disable Jekyll

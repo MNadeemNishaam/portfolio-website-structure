@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { type FormEvent, useState } from 'react'
 import {
   ArrowUpRight,
   Check,
@@ -33,7 +33,51 @@ const cases = [
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const marqueeLine = 'Man-centered software ✳ Operational clarity ✳ AI systems ✳ '
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setSubmitError(null)
+
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT
+    if (!endpoint) {
+      setSubmitError('Contact form is not configured yet. Please try the email link above.')
+      return
+    }
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+          subject: 'New portfolio contact form submission',
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Submission failed')
+      }
+
+      form.reset()
+      setSubmitted(true)
+    } catch {
+      setSubmitError('Could not send your note right now. Please email me directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <main>
@@ -74,7 +118,7 @@ export default function Page() {
 
       <section className="trust section-pad"><div><p className="kicker">The toolkit</p><h2>Practical tech.<br /><span>Purposeful use.</span></h2></div><div className="stack-list"><span>Computer vision</span><span>LLM systems</span><span>Next.js</span><span>Python</span><span>Postgres</span><span>Edge computing</span><span>Workflow APIs</span><span>Private search</span></div></section>
 
-      <section className="contact section-pad" id="contact"><div className="contact-copy"><p className="kicker">Have a challenge?</p><h2>Let&apos;s make<br /><em>something useful.</em></h2><p>Tell me what is slowing your team down. I&apos;ll bring questions, not a sales pitch.</p><a href="mailto:m.nadeemnishaam@gmail.com" className="email-link">m.nadeemnishaam@gmail.com <ArrowUpRight size={18} /></a></div><form className="contact-form" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success"><div className="success-icon"><Check /></div><h3>Thanks - I&apos;ll be in touch.</h3><p>Your note is on its way to my inbox.</p></div> : <><label>Your name<input required name="name" placeholder="Jane Smith" /></label><label>Work email<input required type="email" name="email" placeholder="jane@company.com" /></label><label>What can I help with?<textarea required name="message" rows={4} placeholder="A quick note about the challenge..." /></label><button className="button button-light" type="submit">Send your note <ArrowUpRight size={17} /></button></>}</form></section>
+      <section className="contact section-pad" id="contact"><div className="contact-copy"><p className="kicker">Have a challenge?</p><h2>Let&apos;s make<br /><em>something useful.</em></h2><p>Tell me what is slowing your team down. I&apos;ll bring questions, not a sales pitch.</p><a href="mailto:m.nadeemnishaam@gmail.com" className="email-link">m.nadeemnishaam@gmail.com <ArrowUpRight size={18} /></a></div><form className="contact-form" onSubmit={handleSubmit}>{submitted ? <div className="success"><div className="success-icon"><Check /></div><h3>Thanks - I&apos;ll be in touch.</h3><p>Your note is on its way to my inbox.</p></div> : <><label>Your name<input required name="name" placeholder="Jane Smith" /></label><label>Work email<input required type="email" name="email" placeholder="jane@company.com" /></label><label>What can I help with?<textarea required name="message" rows={4} placeholder="A quick note about the challenge..." /></label>{submitError && <p className="form-error">{submitError}</p>}<button className="button button-light" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Sending...' : 'Send your note'} {!isSubmitting && <ArrowUpRight size={17} />}</button></>}</form></section>
 
       <footer><a className="brand" href="#top"><span className="brand-mark">N</span>nadeem<span className="brand-dot">.</span></a><span>© 2026 Nadeem Nishaam</span><a href="#top">Back to top ↑</a></footer>
     </main>
