@@ -33,11 +33,12 @@ const cases = [
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const marqueeLine = 'Man-centered software ✳ Operational clarity ✳ AI systems ✳ '
 
   return (
     <main>
       <nav className="nav-shell" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="Northstar Systems home"><span className="brand-mark">N</span>northstar<span className="brand-dot">.</span></a>
+        <a className="brand" href="#top" aria-label="Nadeem Nishaam home"><span className="brand-mark">N</span>nadeem<span className="brand-dot">.</span></a>
         <div className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
           <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
           <a href="#work" onClick={() => setMenuOpen(false)}>Selected work</a>
@@ -49,7 +50,6 @@ export default function Page() {
 
       <section className="hero section-pad" id="top">
         <div className="hero-gridline" aria-hidden="true" />
-        <div className="eyebrow"><span className="pulse" /> Independent software studio · 2026</div>
         <h1>Make the work<br /><em>work harder.</em></h1>
         <div className="hero-bottom">
           <p className="hero-copy">Custom AI and software systems for businesses ready to replace busywork with momentum.</p>
@@ -58,10 +58,10 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="marquee" aria-label="Capabilities"><div>AI systems <span>✳</span> Workflow automation <span>✳</span> Human-centered software <span>✳</span> Operational clarity <span>✳</span> AI systems <span>✳</span></div></section>
+      <section className="marquee" aria-label="Capabilities"><div className="marquee-track"><span>{marqueeLine.repeat(6)}</span><span aria-hidden="true">{marqueeLine.repeat(6)}</span></div></section>
 
       <section className="section-pad services" id="services">
-        <div className="section-intro"><p className="kicker">What we solve</p><h2>Less friction.<br /><span>More forward.</span></h2><p className="intro-copy">The best technology disappears into the way your business works. We find the friction, then build what removes it.</p></div>
+        <div className="section-intro"><p className="kicker">What I solve</p><h2>Less friction.<br /><span>More forward.</span></h2><p className="intro-copy">The best technology disappears into the way your business works. I find the friction, then build what removes it.</p></div>
         <div className="service-grid">{services.map(({ icon: Icon, number, title, text }) => <article className="service-card" key={number}><div className="service-top"><Icon size={22} strokeWidth={1.5} /><span>{number}</span></div><h3>{title}</h3><p>{text}</p><a href="#contact" aria-label={`Learn more about ${title}`}><ArrowUpRight size={18} /></a></article>)}</div>
       </section>
 
@@ -70,13 +70,13 @@ export default function Page() {
         <div className="case-list">{cases.map((item, index) => <article className={`case-card ${item.accent}`} key={item.title}><div className="case-visual"><div className="visual-grid" /><div className="visual-label">CASE / 0{index + 1}</div><div className="visual-orb" /><div className="visual-line" /><span className="visual-caption">{index === 0 ? 'LIVE INSPECTION' : index === 1 ? 'SEARCH INDEX' : 'EDGE NODE'}</span></div><div className="case-content"><p className="case-tag">{item.tag}</p><h3>{item.title}</h3><p className="case-problem">{item.problem}</p><div className="case-result"><div><strong>{item.result}</strong><span>{item.detail}</span></div><ArrowUpRight size={19} /></div></div></article>)}</div>
       </section>
 
-      <section className="process section-pad" id="process"><div className="process-heading"><p className="kicker">How we work</p><h2>Clear steps.<br /><span>Useful outcomes.</span></h2></div><div className="steps"><div className="step"><span>01</span><h3>Discovery call</h3><p>We map your bottlenecks, manual processes, and the opportunities hiding in plain sight.</p></div><div className="step"><span>02</span><h3>Prototype & proposal</h3><p>You get a clear scope, a working direction, and a plan tied to business value.</p></div><div className="step"><span>03</span><h3>Build & improve</h3><p>We ship in focused loops, train your team, and stay close as the system gets smarter.</p></div></div></section>
+      <section className="process section-pad" id="process"><div className="process-heading"><p className="kicker">How I work</p><h2>Clear steps.<br /><span>Useful outcomes.</span></h2></div><div className="steps"><div className="step"><span>01</span><h3>Discovery call</h3><p>I map your bottlenecks, manual processes, and the opportunities hiding in plain sight.</p></div><div className="step"><span>02</span><h3>Prototype & proposal</h3><p>You get a clear scope, a working direction, and a plan tied to business value.</p></div><div className="step"><span>03</span><h3>Build & improve</h3><p>I ship in focused loops, train your team, and stay close as the system gets smarter.</p></div></div></section>
 
       <section className="trust section-pad"><div><p className="kicker">The toolkit</p><h2>Practical tech.<br /><span>Purposeful use.</span></h2></div><div className="stack-list"><span>Computer vision</span><span>LLM systems</span><span>Next.js</span><span>Python</span><span>Postgres</span><span>Edge computing</span><span>Workflow APIs</span><span>Private search</span></div></section>
 
-      <section className="contact section-pad" id="contact"><div className="contact-copy"><p className="kicker">Have a challenge?</p><h2>Let&apos;s make<br /><em>something useful.</em></h2><p>Tell us what is slowing your team down. We&apos;ll bring questions, not a sales pitch.</p><a href="mailto:hello@northstar.systems" className="email-link">hello@northstar.systems <ArrowUpRight size={18} /></a></div><form className="contact-form" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success"><div className="success-icon"><Check /></div><h3>Thanks — we&apos;ll be in touch.</h3><p>Your note is on its way to the studio.</p></div> : <><label>Your name<input required name="name" placeholder="Jane Smith" /></label><label>Work email<input required type="email" name="email" placeholder="jane@company.com" /></label><label>What can we help with?<textarea required name="message" rows={4} placeholder="A quick note about the challenge..." /></label><button className="button button-light" type="submit">Send your note <ArrowUpRight size={17} /></button></>}</form></section>
+      <section className="contact section-pad" id="contact"><div className="contact-copy"><p className="kicker">Have a challenge?</p><h2>Let&apos;s make<br /><em>something useful.</em></h2><p>Tell me what is slowing your team down. I&apos;ll bring questions, not a sales pitch.</p><a href="mailto:m.nadeemnishaam@gmail.com" className="email-link">m.nadeemnishaam@gmail.com <ArrowUpRight size={18} /></a></div><form className="contact-form" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success"><div className="success-icon"><Check /></div><h3>Thanks - I&apos;ll be in touch.</h3><p>Your note is on its way to my inbox.</p></div> : <><label>Your name<input required name="name" placeholder="Jane Smith" /></label><label>Work email<input required type="email" name="email" placeholder="jane@company.com" /></label><label>What can I help with?<textarea required name="message" rows={4} placeholder="A quick note about the challenge..." /></label><button className="button button-light" type="submit">Send your note <ArrowUpRight size={17} /></button></>}</form></section>
 
-      <footer><a className="brand" href="#top"><span className="brand-mark">N</span>northstar<span className="brand-dot">.</span></a><span>© 2026 Northstar Systems</span><a href="#top">Back to top ↑</a></footer>
+      <footer><a className="brand" href="#top"><span className="brand-mark">N</span>nadeem<span className="brand-dot">.</span></a><span>© 2026 Nadeem Nishaam</span><a href="#top">Back to top ↑</a></footer>
     </main>
   )
 }

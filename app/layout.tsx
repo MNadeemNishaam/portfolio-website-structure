@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Northstar Systems — Software that moves work forward',
-  description: 'Custom AI and software systems for businesses ready to replace busywork with momentum.',
+  title: 'Nadeem Nishaam — Freelance AI & Software Builder',
+  description: 'Freelance AI and software solutions for businesses ready to replace busywork with momentum.',
   generator: 'v0.app',
   icons: {
     icon: [
